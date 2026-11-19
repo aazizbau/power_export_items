@@ -139,7 +139,7 @@ def write_report(
     scope_hash: str,
 ) -> Path:
     output_dir.mkdir(parents=True, exist_ok=True)
-    charts = write_png_charts(monthly, chart_dir)
+    charts = write_png_charts(monthly, chart_dir, scope)
     monthly_df = pd.DataFrame(monthly)
     detail_df = pd.DataFrame(detail)
     scope_df = pd.DataFrame(scope)
@@ -241,8 +241,9 @@ def write_report(
         writer.sheets["Charts"] = chart_sheet
         chart_sheet.insert_image("A1", str(charts[0]), {"x_scale": 0.50, "y_scale": 0.50})
         chart_sheet.insert_image("A41", str(charts[1]), {"x_scale": 0.62, "y_scale": 0.62})
-        chart_sheet.insert_image("A78", str(charts[2]), {"x_scale": 0.72, "y_scale": 0.72})
-        chart_sheet.insert_image("A108", str(charts[3]), {"x_scale": 0.72, "y_scale": 0.72})
+        chart_sheet.insert_image("A78", str(charts[2]), {"x_scale": 0.48, "y_scale": 0.48})
+        chart_sheet.insert_image("A128", str(charts[3]), {"x_scale": 0.72, "y_scale": 0.72})
+        chart_sheet.insert_image("A158", str(charts[4]), {"x_scale": 0.72, "y_scale": 0.72})
 
     _write_briefing(output_dir, scope, monthly, issues, provisional)
     return report_path

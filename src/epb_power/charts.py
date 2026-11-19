@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import os
+import textwrap
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 
 
-def write_png_charts(monthly: list[dict[str, Any]], output_dir: Path) -> list[Path]:
+def write_png_charts(
+    monthly: list[dict[str, Any]], output_dir: Path, scope: list[dict[str, str]]
+) -> list[Path]:
     cache_dir = output_dir / ".matplotlib"
     cache_dir.mkdir(parents=True, exist_ok=True)
     os.environ.setdefault("MPLCONFIGDIR", str(cache_dir))
@@ -14,6 +17,7 @@ def write_png_charts(monthly: list[dict[str, Any]], output_dir: Path) -> list[Pa
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    from matplotlib.patches import FancyBboxPatch
 
     output_dir.mkdir(parents=True, exist_ok=True)
     groups = sorted({row["product_group"] for row in monthly})
@@ -146,6 +150,103 @@ def write_png_charts(monthly: list[dict[str, Any]], output_dir: Path) -> list[Pa
     fig.savefig(fiscal_shares, dpi=180, bbox_inches="tight")
     plt.close(fig)
 
+    included_scope = [row for row in scope if row.get("include", "").upper() == "Y"]
+    scope_by_group = {
+        group: sorted(
+            [row for row in included_scope if row["product_group"] == group],
+            key=lambda row: row["hs8"],
+        )
+        for group in groups
+    }
+    fig, axis = plt.subplots(figsize=(24, 13))
+    axis.set_xlim(0, len(groups))
+    axis.set_ylim(0, 11.5)
+    axis.axis("off")
+    for group_index, group in enumerate(groups):
+        color = colors[group_index % len(colors)]
+        x_value = group_index + 0.08
+        column_width = 0.84
+        header = FancyBboxPatch(
+            (x_value, 10.35),
+            column_width,
+            0.75,
+            boxstyle="round,pad=0.02,rounding_size=0.06",
+            facecolor=color,
+            edgecolor=color,
+        )
+        axis.add_patch(header)
+        items = scope_by_group[group]
+        axis.text(
+            x_value + column_width / 2,
+            10.72,
+            f"{group}\n{len(items)} included HS8 code{'s' if len(items) != 1 else ''}",
+            ha="center",
+            va="center",
+            fontsize=10,
+            fontweight="bold",
+            color="white",
+        )
+        for row_index, row in enumerate(items):
+            top = 10.05 - row_index * 1.02
+            card = FancyBboxPatch(
+                (x_value, top - 0.86),
+                column_width,
+                0.82,
+                boxstyle="round,pad=0.018,rounding_size=0.035",
+                facecolor="#F7F9FB",
+                edgecolor=color,
+                linewidth=1.25,
+            )
+            axis.add_patch(card)
+            description = row.get("description", "").replace(
+                "[HS6 parent; source HS8 description blank] ", "Parent description: "
+            ).replace("[HS4 parent; source HS8 description blank] ", "Parent description: ")
+            wrapped_description = "\n".join(textwrap.wrap(description, width=31)[:2])
+            axis.text(
+                x_value + 0.04,
+                top - 0.23,
+                row["hs8"],
+                ha="left",
+                va="center",
+                fontsize=11,
+                fontweight="bold",
+                family="monospace",
+                color=color,
+            )
+            axis.text(
+                x_value + 0.04,
+                top - 0.58,
+                wrapped_description,
+                ha="left",
+                va="center",
+                fontsize=7.2,
+                color="#333333",
+            )
+    axis.text(
+        len(groups) / 2,
+        11.38,
+        "Exact 8-digit HS codes used to construct the five selected product groups",
+        ha="center",
+        va="center",
+        fontsize=18,
+        fontweight="bold",
+        color="#17365D",
+    )
+    axis.text(
+        len(groups) / 2,
+        0.18,
+        f"Conservative draft scope: {len(included_scope)} included HS8 codes. Human approval is required before official publication.",
+        ha="center",
+        va="center",
+        fontsize=10,
+        color="#9C0006",
+        fontweight="bold",
+    )
+    fig.tight_layout()
+    scope_mapping = output_dir / "hs8_scope_mapping_five_product_groups.png"
+    fig.savefig(scope_mapping, dpi=180, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+
     fig, axis = plt.subplots(figsize=(13, 6.5))
     for group in groups:
         values = [lookup[(month, group)]["monthly_usd_million"] for month in months]
@@ -174,5 +275,5 @@ def write_png_charts(monthly: list[dict[str, Any]], output_dir: Path) -> list[Pa
     mom = output_dir / "mom_growth.png"
     fig.savefig(mom, dpi=180)
     plt.close(fig)
-    return [grouped_bars, fiscal_shares, trend, mom]
+    return [grouped_bars, fiscal_shares, scope_mapping, trend, mom]
 
