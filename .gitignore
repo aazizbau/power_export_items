@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.env
+.DS_Store
+Thumbs.db
+.idea/
+outputs/
+logs/
+data/*.xlsx
+!data/.gitkeep
+

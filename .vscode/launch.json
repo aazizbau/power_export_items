@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "EPB validate",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "epb_power",
+      "args": ["validate"],
+      "env": {"PYTHONPATH": "${workspaceFolder}/src"},
+      "console": "integratedTerminal"
+    }
+  ]
+}

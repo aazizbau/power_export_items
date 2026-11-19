@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "EPB: validate",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": ["-m", "epb_power", "validate"],
+      "options": {"env": {"PYTHONPATH": "${workspaceFolder}/src"}},
+      "problemMatcher": []
+    },
+    {
+      "label": "EPB: provisional report",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": ["-m", "epb_power", "report", "--allow-incomplete", "--allow-draft-scope"],
+      "options": {"env": {"PYTHONPATH": "${workspaceFolder}/src"}},
+      "problemMatcher": []
+    }
+  ]
+}
+

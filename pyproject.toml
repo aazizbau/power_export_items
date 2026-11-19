@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "epb-power"
+version = "0.1.0"
+description = "Auditable EPB power-equipment export analysis"
+requires-python = ">=3.11"
+dependencies = [
+  "pandas>=2.2,<3",
+  "openpyxl>=3.1,<4",
+  "XlsxWriter>=3.2,<4",
+  "matplotlib>=3.9,<4",
+]
+
+[project.scripts]
+epb-power = "epb_power.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+markers = ["integration: exercises the user-provided local workbooks"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+exclude = [".venv", "outputs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+

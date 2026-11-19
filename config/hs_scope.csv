@@ -1,0 +1,49 @@
+﻿hs8,product_group,include,review_status,decision_note,description
+85042100,Transformers,Y,draft,Exact transformer HS6 family named in specification,"Liquid Dielectric Transformers, Power Handling Capacity =<650 Kva"
+85042210,Transformers,Y,draft,Exact transformer HS6 family named in specification,Having a power handling capacity exceeding 650kVA but exceeding 1000kVA
+85042290,Transformers,Y,draft,Exact transformer HS6 family named in specification,Having a power handling capacity exceeding 1000kVA but not exceeding 10000kVA
+85042310,Transformers,Y,draft,Exact transformer HS6 family named in specification,"Liquid Dielectric Transformers, Power Handling Capacity >10000 Kva"
+85042390,Transformers,Y,draft,Exact transformer HS6 family named in specification,"Liquid Dielectric Transformers, Power Handling Capacity >10000 Kva"
+85043100,Transformers,Y,draft,Exact transformer HS6 family named in specification,"Transformers, Nes, Power Handling Capacity =<1 Kva"
+85043200,Transformers,Y,draft,Exact transformer HS6 family named in specification,"Transformers, Nes, Power Handling Capacity =>1 Kva But <=16 Kva"
+85043300,Transformers,Y,draft,Exact transformer HS6 family named in specification,"Transformers, Nes, Power Handling Capacity 16-500 Kva"
+85043400,Transformers,Y,draft,Exact transformer HS6 family named in specification,"Transformers, Nes, Power Handling Capacity >500 Kva"
+85044010,Grid-relevant inverters & converters,N,draft,Generic static converter cannot be labelled grid/solar,Mobile battery charger(less than 6V)
+85044020,Grid-relevant inverters & converters,N,draft,Generic static converter cannot be labelled grid/solar,UPS/IPS (Capacity upto 2000 VA)
+85044030,Grid-relevant inverters & converters,N,draft,Generic static converter cannot be labelled grid/solar,"Voltage stabilizer (capacity upto 2,000 VA)"
+85044040,Grid-relevant inverters & converters,N,draft,Generic static converter cannot be labelled grid/solar,[HS6 parent; source HS8 description blank] Static converters
+85044050,Grid-relevant inverters & converters,N,draft,Generic static converter cannot be labelled grid/solar,[HS6 parent; source HS8 description blank] Static converters
+85044090,Grid-relevant inverters & converters,N,draft,Generic static converter cannot be labelled grid/solar,Other Static converters
+85071000,Industrial & storage batteries,N,draft,Automotive starter battery excluded,Lead-Acid Accumulators For Starting Piston Engines
+85072090,Industrial & storage batteries,N,draft,Battery end-use is not proven stationary/industrial,Other Lead Acid Accumulators
+85073000,Industrial & storage batteries,N,draft,Battery end-use is not proven stationary/industrial,"Nickel-Cadmium Accumulators, Separators."
+85076000,Industrial & storage batteries,N,draft,Battery end-use is not proven stationary/industrial,Lithium-ion
+85079090,Industrial & storage batteries,N,draft,Battery end-use is not proven stationary/industrial,"Parts Of Electric Accumulators, Nes"
+85351000,Switchgear & protection,Y,draft,Description supports switching/protection function,"Fuses, >1000 V"
+85352900,Switchgear & protection,Y,draft,Description supports switching/protection function,Automatic Circuit Breakers For A Voltage >72.5 Kv
+85353000,Switchgear & protection,Y,draft,Description supports switching/protection function,"Isolating Switches And Make-And-Break Switches, >1000 V"
+85354010,Switchgear & protection,Y,draft,Description supports switching/protection function,Lightning arresters
+85359090,Switchgear & protection,Y,draft,Description supports switching/protection function,"Other Apparatus For Switching... Electrical Circuits, >1000 V, Nes"
+85361000,Switchgear & protection,Y,draft,Description supports switching/protection function,"Fuses, =<1000 V"
+85362000,Switchgear & protection,Y,draft,Description supports switching/protection function,"Automatic Circuit Breakers, =<1000 V"
+85363090,Switchgear & protection,Y,draft,Description supports switching/protection function,"Apparatus For Protecting Electrical Circuits, Nes, =<1000  V"
+85364100,Switchgear & protection,N,draft,Generic/low-voltage description does not establish power-sector use,Relays For A Voltage =<60 V
+85365000,Switchgear & protection,N,draft,Generic/low-voltage description does not establish power-sector use,Other switches
+85366100,Switchgear & protection,N,draft,Accessory/general connection item excluded conservatively,"Lamp-Holders, =<1000 V"
+85366900,Switchgear & protection,N,draft,Accessory/general connection item excluded conservatively,"Plugs And Sockets, =<1000 V"
+85367000,Switchgear & protection,N,draft,Accessory/general connection item excluded conservatively,"Connectors for optical fibres, optical fibre bundles or cables"
+85369010,Switchgear & protection,N,draft,Generic/low-voltage description does not establish power-sector use,"Apparatus For Switching... Electrical Circuits, Nes, =<1000 V"
+85369090,Switchgear & protection,N,draft,Generic/low-voltage description does not establish power-sector use,"Apparatus For Switching... Electrical Circuits, Nes, =<1000 V"
+85371010,Distribution & control panels,Y,draft,Board/panel HS4 for electric control or distribution,[HS6 parent; source HS8 description blank] Boards equipped with apparatus of 85.35/85.36; voltage <=1000 V
+85371020,Distribution & control panels,Y,draft,Board/panel HS4 for electric control or distribution,[HS6 parent; source HS8 description blank] Boards equipped with apparatus of 85.35/85.36; voltage <=1000 V
+85371090,Distribution & control panels,Y,draft,Board/panel HS4 for electric control or distribution,[HS6 parent; source HS8 description blank] Boards equipped with apparatus of 85.35/85.36; voltage <=1000 V
+85372000,Distribution & control panels,Y,draft,Board/panel HS4 for electric control or distribution,"Boards...Equipped With Two/More Apparatus Of 85.35/85.36, Voltage > 1000v"
+85414300,Solar PV cells & modules,Y,draft,Exact photovoltaic cells/modules HS6 family,[HS4 parent; source HS8 description blank] Photosensitive semiconductor devices including photovoltaic cells
+85441100,Power cables & conductors,N,draft,Description is not clearly power cable/conductor,[HS6 parent; source HS8 description blank] Winding wire of copper
+85441910,Power cables & conductors,N,draft,General/low-voltage conductor end-use is not demonstrably power-sector,Cotton Braided Electric Cables
+85441990,Power cables & conductors,N,draft,General/low-voltage conductor end-use is not demonstrably power-sector,Other Winding Wire (Excl Wire Of Copper & Cotton Braided Electric Cables)
+85442000,Power cables & conductors,N,draft,Telecom/optical/vehicle-specific cabling excluded,Co-Axial Cable And Other Co-Axial Electric Conductors
+85444200,Power cables & conductors,N,draft,General/low-voltage conductor end-use is not demonstrably power-sector,"Other electric conductors for a voltage not exceeding 1,000 V: Fitted with conn"
+85444900,Power cables & conductors,N,draft,General/low-voltage conductor end-use is not demonstrably power-sector,"Electric Conductors, Nes, For A Voltage <=80 V, Not Fitted With Connectors"
+85446000,Power cables & conductors,Y,draft,Insulated electrical wire/cable description,"Other electric conductors, for a voltage exceeding 1000V"
+85447000,Power cables & conductors,N,draft,Telecom/optical/vehicle-specific cabling excluded,Optical Fibre Cables Made Up Of Individually Sheathed Fibres

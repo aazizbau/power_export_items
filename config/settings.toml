@@ -1,0 +1,14 @@
+[project]
+timezone = "Asia/Dhaka"
+start_month = "2025-07"
+end_month = "2026-10"
+currency = "USD"
+
+[quality]
+overall_total_tolerance_usd = 1.00
+june_overlap_tolerance_usd = 0.01
+negative_monthly_values = "retain_and_flag"
+
+[report]
+filename = "epb_power_equipment_exports_2025_07_to_2026_10.xlsx"
+
