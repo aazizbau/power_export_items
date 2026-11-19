@@ -240,8 +240,9 @@ def write_report(
         chart_sheet = workbook.add_worksheet("Charts")
         writer.sheets["Charts"] = chart_sheet
         chart_sheet.insert_image("A1", str(charts[0]), {"x_scale": 0.50, "y_scale": 0.50})
-        chart_sheet.insert_image("A41", str(charts[1]), {"x_scale": 0.72, "y_scale": 0.72})
-        chart_sheet.insert_image("A71", str(charts[2]), {"x_scale": 0.72, "y_scale": 0.72})
+        chart_sheet.insert_image("A41", str(charts[1]), {"x_scale": 0.62, "y_scale": 0.62})
+        chart_sheet.insert_image("A78", str(charts[2]), {"x_scale": 0.72, "y_scale": 0.72})
+        chart_sheet.insert_image("A108", str(charts[3]), {"x_scale": 0.72, "y_scale": 0.72})
 
     _write_briefing(output_dir, scope, monthly, issues, provisional)
     return report_path

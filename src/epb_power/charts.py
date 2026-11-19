@@ -78,6 +78,74 @@ def write_png_charts(monthly: list[dict[str, Any]], output_dir: Path) -> list[Pa
     fig.savefig(grouped_bars, dpi=180, bbox_inches="tight")
     plt.close(fig)
 
+    periods = [
+        ("FY 2025–26: July 2025–June 2026", months[:12]),
+        ("FY 2026–27 YTD: July–October 2026", months[12:]),
+    ]
+    fig, axes = plt.subplots(1, 2, figsize=(20, 8), sharey=True)
+    for axis, (period_label, period_months) in zip(axes, periods, strict=True):
+        totals: list[float | None] = []
+        for group in groups:
+            values = [lookup[(month, group)]["monthly_usd_million"] for month in period_months]
+            totals.append(sum(values) if all(value is not None for value in values) else None)
+        in_scope_total = sum(value for value in totals if value is not None)
+        y_positions = list(range(len(groups)))
+        bars = axis.barh(
+            y_positions,
+            [float("nan") if value is None else value for value in totals],
+            color=colors[: len(groups)],
+            height=0.62,
+        )
+        largest = max((abs(value) for value in totals if value is not None), default=1.0)
+        for bar, value in zip(bars, totals, strict=True):
+            if value is None:
+                label = "NA"
+                x_value = 0
+            else:
+                share = value / in_scope_total * 100 if in_scope_total else 0
+                amount = f"USD {value:.3f}M" if abs(value) >= 1 else f"USD {value * 1000:,.1f}K"
+                label = f"{amount}  |  {share:.2f}%"
+                x_value = value
+            axis.annotate(
+                label,
+                xy=(x_value, bar.get_y() + bar.get_height() / 2),
+                xytext=(7 if x_value >= 0 else -7, 0),
+                textcoords="offset points",
+                ha="left" if x_value >= 0 else "right",
+                va="center",
+                fontsize=9,
+                fontweight="bold",
+            )
+        axis.set_title(
+            f"{period_label}\nSelected in-scope total: USD {in_scope_total:.3f} million",
+            fontsize=13,
+            fontweight="bold",
+        )
+        axis.set_xlabel("Export value (USD million)")
+        axis.set_xlim(left=min(0, min((value or 0) for value in totals) * 1.2), right=largest * 1.48)
+        axis.grid(axis="x", alpha=0.25)
+        axis.axvline(0, color="#444444", linewidth=0.8)
+    axes[0].set_yticks(list(range(len(groups))))
+    axes[0].set_yticklabels(groups, fontsize=10)
+    axes[0].invert_yaxis()
+    fig.suptitle(
+        "Five selected product groups: fiscal-period export totals and shares",
+        fontsize=17,
+        fontweight="bold",
+    )
+    fig.text(
+        0.5,
+        0.015,
+        "Share is each product group's percentage of the five-group selected total. Provisional draft HS scope; amounts are net changes in EPB FYTD cumulative reports.",
+        ha="center",
+        fontsize=9,
+        color="#666666",
+    )
+    fig.tight_layout(rect=(0, 0.045, 1, 0.94))
+    fiscal_shares = output_dir / "fiscal_period_five_product_totals_and_shares.png"
+    fig.savefig(fiscal_shares, dpi=180, bbox_inches="tight")
+    plt.close(fig)
+
     fig, axis = plt.subplots(figsize=(13, 6.5))
     for group in groups:
         values = [lookup[(month, group)]["monthly_usd_million"] for month in months]
@@ -106,5 +174,5 @@ def write_png_charts(monthly: list[dict[str, Any]], output_dir: Path) -> list[Pa
     mom = output_dir / "mom_growth.png"
     fig.savefig(mom, dpi=180)
     plt.close(fig)
-    return [grouped_bars, trend, mom]
+    return [grouped_bars, fiscal_shares, trend, mom]
 
